@@ -6,9 +6,9 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import CommentIcon from '@mui/icons-material/Comment';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-
-const Post = forwardRef(({name, description, message, photoUrl},ref)=>{
+const Post = forwardRef(({name, description, message, photoUrl,onClick,id},ref)=>{
 
     return (
     <div ref={ref} className='post'>
@@ -28,6 +28,7 @@ const Post = forwardRef(({name, description, message, photoUrl},ref)=>{
             <InputOption title='Comment' color='gray' Icon={CommentIcon} />
             <InputOption title='Share' color='gray' Icon={ShareOutlinedIcon} />
             <InputOption title='Send' color='gray' Icon={SendIcon} />
+            <InputOption title='Delete' onClick={() => onClick(id)} color='gray' Icon={DeleteIcon} />
         </div>
     </div>
   )

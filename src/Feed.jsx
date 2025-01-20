@@ -9,7 +9,7 @@ import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
 import Post from './Post';
 
 // Import Firestore utilities
-import { collection, onSnapshot, addDoc,  serverTimestamp, orderBy, query } from "firebase/firestore";
+import { collection, onSnapshot, addDoc,  serverTimestamp, orderBy, query, deleteDoc, doc } from "firebase/firestore";
 import { db } from './fireBase';
 import { useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice';
@@ -50,6 +50,12 @@ function Feed() {
 
   };
 
+  const deleteHandler = (id)=>{
+    const postsCollection = collection(db, "posts")
+    // console.log(id)
+    deleteDoc(doc(postsCollection, id));
+  }
+
   return (
     <div className='feed'>
       <div className="feed-input-container">
@@ -71,7 +77,7 @@ function Feed() {
       {/* Posts */}
       <FlipMove>
       {posts.map(({id,data:{name,description, message, photoUrl}}) => (
-        <Post key={id} name={name} description={description} message={message} photoUrl={photoUrl}
+        <Post key={id} onClick={()=>deleteHandler(id)} name={name} description={description} message={message} photoUrl={photoUrl}
         />
       ))}
       </FlipMove>
